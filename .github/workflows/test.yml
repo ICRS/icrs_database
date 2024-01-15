@@ -6,21 +6,6 @@ jobs:
   Explore-GitHub-Actions:
     # You need to use the INSTALLATION_NAME from the previous step
     runs-on: self-hosted
-    
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        # Provide the password for postgres
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-        
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
     - run: echo "🎉 This job uses runner scale set runners!"
