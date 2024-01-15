@@ -12,5 +12,5 @@ jobs:
       uses: actions/checkout@v4
     - run: echo "🎉 This job uses runner scale set runners!"
     - run: cat src/discord_database.sql
-    - run: psql -U $POSTGRES_USERNAME -d $POSTGRES_DATABASE -a -f src/discord_database.sql
-    - run: psql -U $POSTGRES_USERNAME -d $POSTGRES_DATABASE -a -f src/lab_database.sql
+    - run: psql -U ${{ secrets.POSTGRES_USERNAME }} -d ${{ secrets.POSTGRES_DATABASE }} -a -f src/discord_database.sql
+    - run: psql -U ${{ secrets.POSTGRES_USERNAME }} -d ${{ secrets.POSTGRES_DATABASE }} -a -f src/lab_database.sql
