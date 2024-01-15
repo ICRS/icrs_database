@@ -24,5 +24,6 @@ jobs:
 
     steps:
     - run: echo "🎉 This job uses runner scale set runners!"
+    - run: cat src/discord_database.sql
     - run: psql -U $POSTGRES_USERNAME -d $POSTGRES_DATABASE -a -f src/discord_database.sql
     - run: psql -U $POSTGRES_USERNAME -d $POSTGRES_DATABASE -a -f src/lab_database.sql
