@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: partdb-uploads-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: microk8s-hostpath 
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: >-
+      /var/snap/microk8s/common/default-storage/partdb-uploads
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Delete
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: partdb-uploads-pv-claim
+spec:
+  storageClassName: microk8s-hostpath 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  volumeName: partdb-uploads-pv-volume
+  storageClassName: microk8s-hostpath 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: partdb-public-media-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: microk8s-hostpath 
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: >-
+      /var/snap/microk8s/common/default-storage/partdb-public
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Delete
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: partdb-public-media-pv-claim
+spec:
+  storageClassName: microk8s-hostpath 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  volumeName: partdb-public-media-pv-volume
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: partdb-db-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: microk8s-hostpath 
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: >-
+      /var/snap/microk8s/common/default-storage/partdb-db
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Delete
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: partdb-db-pv-claim
+spec:
+  storageClassName: microk8s-hostpath 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  volumeName: partdb-db-pv-volume

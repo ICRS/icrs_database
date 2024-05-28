@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: partdb
+spec:
+  selector:
+    matchLabels:
+      app: partdb
+  template:
+    metadata:
+      labels:
+        app: partdb
+    spec:
+      containers:
+      - image: jbtronics/part-db1:latest
+        name: partdb
+        env:
+        - name: DATABASE_URL
+          value: sqlite:///%kernel.project_dir%/var/db/app.db
+        - name: APP_ENV
+          value: docker
+        - name: DEFAULT_LANG
+          value: en
+        - name: DEFAULT_TIMEZONE
+          value: Europe/London
+        - name: BASE_CURRENCY
+          value: GBP
+        - name: INSTANCE_NAME
+          value: Part-DB
+        - name: ALLOW_ATTACHMENT_DOWNLOADS
+          value: "0"
+        - name: USE_GRAVATAR
+          value: "0"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: partdb-uploads
+          mountPath: /var/www/html/uploads
+        - name: partdb-public-media
+          mountPath: /var/www/html/public/media
+        - name: partdb-db
+          mountPath: /var/www/html/var/db
+      volumes:
+      - name: partdb-uploads
+        persistentVolumeClaim:
+          claimName: partdb-uploads-pv-claim
+      - name: partdb-public-media
+        persistentVolumeClaim:
+          claimName: partdb-public-media-pv-claim
+      - name: partdb-db
+        persistentVolumeClaim:
+          claimName: partdb-db-pv-claim
+      nodeSelector:
+        kubernetes.io/arch: amd64
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: partdb
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30069
+  selector:
+    app: partdb
+  type: NodePort
+---
