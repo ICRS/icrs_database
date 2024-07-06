@@ -1,8 +1,7 @@
 CREATE TABLE IF NOT EXISTS USER_IMAGE
 (
 	name TEXT,
-	image BYTEA,
-	CONSTRAINT unique_name_image UNIQUE (name, image)
+	image BYTEA
 );
 
 CREATE TABLE IF NOT EXISTS USER_QUOTE
