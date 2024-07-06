@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS MAPPING
 (
-	user_id VARCHAR(18) DEFAULT '',
-	shortcode VARCHAR(8) DEFAULT '',
-    active INTEGER DEFAULT 0
+	user_id VARCHAR(18) DEFAULT '' UNIQUE,
+	shortcode VARCHAR(8) DEFAULT '' UNIQUE,
+	active INTEGER DEFAULT 0,
+	UNIQUE (user_id, shortcode)
 );
