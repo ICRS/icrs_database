@@ -47,3 +47,9 @@ CREATE TABLE IF NOT EXISTS SHORTCODE_CARD_MAPPING
     SHORTCODE VARCHAR(10) NOT NULL,
     PRIMARY KEY(ID, SHORTCODE)
 );
+
+INSERT INTO public.induction
+SELECT DISTINCT shortcode, canprint='TRUE' print, canlasercut='TRUE' laser, valid='TRUE' FROM public.access
+
+INSERT INTO public.shortcode_card_mapping 
+SELECT shortcode, canprint, canlasercut, valid FROM public.access
