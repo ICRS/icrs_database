@@ -52,4 +52,6 @@ INSERT INTO public.induction
 SELECT DISTINCT shortcode, canprint='TRUE' print, canlasercut='TRUE' laser, valid='TRUE' FROM public.access
 
 INSERT INTO public.shortcode_card_mapping 
-SELECT shortcode, canprint, canlasercut, valid FROM public.access
+SELECT id, shortcode valid FROM public.access 
+WHERE id IS NOT NULL AND SHORTCODE IS NOT NULL;
+
