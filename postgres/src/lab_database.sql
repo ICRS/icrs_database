@@ -49,9 +49,10 @@ CREATE TABLE IF NOT EXISTS SHORTCODE_CARD_MAPPING
 );
 
 INSERT INTO public.induction
-SELECT DISTINCT shortcode, canprint='TRUE' print, canlasercut='TRUE' laser, valid='TRUE' FROM public.access
+SELECT DISTINCT shortcode, canprint='TRUE' print, canlasercut='TRUE' laser, valid='TRUE' FROM public.access;
 
 INSERT INTO public.shortcode_card_mapping 
 SELECT id, shortcode valid FROM public.access 
 WHERE id IS NOT NULL AND SHORTCODE IS NOT NULL;
 
+ALTER TABLE public.INDUCTION_QUIZ ADD COLUMN IF NOT EXISTS single_choice BOOLEAN DEFAULT FALSE;
