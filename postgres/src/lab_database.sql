@@ -84,3 +84,6 @@ CREATE TABLE IF NOT EXISTS PROJECT_BOX
     EXPIRY DATE DEFAULT public.current_term_end(), 
     BOX_LOCATION INTEGER
 );
+
+ALTER TABLE public.project_box ADD CONSTRAINT pk_id PRIMARY KEY (id);
+ALTER TABLE public.induction_quiz ADD COLUMN "order" INTEGER;
