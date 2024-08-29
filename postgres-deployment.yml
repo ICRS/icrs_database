@@ -23,6 +23,8 @@ spec:
           ports:
             - containerPort: 5432
           env:
+            - name: TZ
+              value: Europe/London
             - name: POSTGRES_DB
               value: {{ POSTGRES_DB }}
             - name: POSTGRES_USER
