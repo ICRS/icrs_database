@@ -87,3 +87,8 @@ CREATE TABLE IF NOT EXISTS PROJECT_BOX
 
 ALTER TABLE public.project_box ADD CONSTRAINT pk_id PRIMARY KEY (id);
 ALTER TABLE public.induction_quiz ADD COLUMN "order" INTEGER;
+
+ALTER TABLE public.induction
+ADD COLUMN print_daytime_time INTEGER DEFAULT 180,
+ADD COLUMN print_night_time INTEGER DEFAULT 540
+;
