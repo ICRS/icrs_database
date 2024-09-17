@@ -92,3 +92,11 @@ ALTER TABLE public.induction
 ADD COLUMN print_daytime_time INTEGER DEFAULT 180,
 ADD COLUMN print_night_time INTEGER DEFAULT 540
 ;
+
+ALTER TABLE public.induction
+ADD COLUMN time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+;
+
+ALTER TABLE public.shortcode_card_mapping
+ADD COLUMN time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+;
