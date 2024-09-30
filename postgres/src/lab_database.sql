@@ -100,3 +100,6 @@ ADD COLUMN time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ALTER TABLE public.shortcode_card_mapping
 ADD COLUMN time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ;
+
+ALTER TABLE public.shortcode_card_mapping 
+ADD CONSTRAINT unique_card_mapping UNIQUE (ID);
