@@ -103,3 +103,6 @@ ADD COLUMN time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 ALTER TABLE public.shortcode_card_mapping 
 ADD CONSTRAINT unique_card_mapping UNIQUE (ID);
+
+ALTER TABLE public.mapping
+ALTER COLUMN user_id TYPE varchar (32);
