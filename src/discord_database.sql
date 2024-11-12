@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS SENT
+(
+	user_id VARCHAR(18) DEFAULT '',
+	shortcode VARCHAR(8) DEFAULT '',
+    active INTEGER DEFAULT 0
+);
