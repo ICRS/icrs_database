@@ -52,5 +52,5 @@ spec:
   selector:
     app: postgres
     task: postgres
-  type: NodePort
+  type: ClusterIP
 ---
