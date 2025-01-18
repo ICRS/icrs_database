@@ -136,3 +136,14 @@ CREATE TABLE IF NOT EXISTS CARD_SCAN_LOG
     ID VARCHAR(20),
     SCANNED_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE VIEW FULL_INDUCTION_VIEW AS
+SELECT 
+    i.shortcode as SHORTCODE,
+    m.id as CARD_ID,
+    i.valid as valid,
+    i.canprint as canprint,
+    i.canlasercut as canlasercut,
+    i.time_added 
+FROM public.induction i 
+LEFT JOIN public.shortcode_card_mapping m ON i.shortcode=m.shortcode;

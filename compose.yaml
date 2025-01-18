@@ -9,7 +9,7 @@
 # https://github.com/docker/awesome-compose
 services:
   db:
-    image: postgres:16
+    image: postgres:17
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
