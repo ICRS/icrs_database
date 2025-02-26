@@ -13,10 +13,11 @@ services:
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./postgres/src/discord_database.sql:/docker-entrypoint-initdb.d/01.sql
-      - ./postgres/src/lab_database.sql:/docker-entrypoint-initdb.d/02.sql
-      - ./postgres/src/meme_database.sql:/docker-entrypoint-initdb.d/03.sql
-      - ./postgres/test/test_example_data.sql:/docker-entrypoint-initdb.d/04.sql
+      - ./postgres/src/discord_database.sql:/docker-entrypoint-initdb.d/00001.sql
+      - ./postgres/src/lab_database.sql:/docker-entrypoint-initdb.d/00002.sql
+      - ./postgres/src/meme_database.sql:/docker-entrypoint-initdb.d/00003.sql
+      - ./postgres/test/project_schema.sql:/docker-entrypoint-initdb.d/00004.sql
+      - ./postgres/test/test_example_data.sql:/docker-entrypoint-initdb.d/00010.sql
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
