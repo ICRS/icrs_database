@@ -12,7 +12,7 @@ spec:
           nodeName: icrs0
           containers:
           - name: postgres-backup
-            image: postgres:alpine
+            image: postgres:17-alpine
             command: ['/bin/bash']
             args: ['-c', 'pg_dump -U $USER -h $POSTGRES_HOSTNAME -p $PORT -d $POSTGRES_DATABASE -f /var/backups/backup-$(date +"%m-%d-%Y-%H-%M").sql ']
             env:
