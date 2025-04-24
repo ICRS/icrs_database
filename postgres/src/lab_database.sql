@@ -138,10 +138,19 @@ CREATE TABLE IF NOT EXISTS public.card_scan_log
     SCANNED_TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP PRIMARY KEY
 );
 
-ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS can_resin BOOLEAN DEFAULT FALSE;
+CREATE TABLE IF NOT EXISTS public.PRINTERS
+(
+    PRINTER_NAME VARCHAR(50) NOT NULL,
+    SERIAL_NUMBER VARCHAR(15) NOT NULL UNIQUE PRIMARY KEY
+);
 
-ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS extended_print_time BOOLEAN DEFAULT FALSE;
-ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS can_use_all_printers BOOLEAN DEFAULT FALSE;
+CREATE TABLE IF NOT EXISTS public.PRINTER_MEMBER 
+(
+    SERIAL_NUMBER varchar(15) REFERENCES public.PRINTERS(SERIAL_NUMBER) ON DELETE CASCADE,
+    SHORTCODE varchar(10) REFERENCES public.INDUCTION(SHORTCODE) ON DELETE CASCADE
+);
+
+ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS can_resin BOOLEAN DEFAULT FALSE;
 
 CREATE OR REPLACE VIEW FULL_INDUCTION_VIEW AS
 SELECT 
@@ -151,8 +160,6 @@ SELECT
     i.canprint as canprint,
     i.canlasercut as canlasercut,
     i.time_added,
-    i.can_resin as can_resin,
-    i.extended_print_time as extended_print_time,
-    i.can_use_all_printers as can_use_all_printers
+    i.can_resin as can_resin
 FROM public.induction i 
 LEFT JOIN public.shortcode_card_mapping m ON i.shortcode=m.shortcode;
