@@ -140,8 +140,7 @@ CREATE TABLE IF NOT EXISTS public.card_scan_log
 
 ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS can_resin BOOLEAN DEFAULT FALSE;
 
-ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS extended_print_time BOOLEAN DEFAULT FALSE;
-ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS can_use_all_printers BOOLEAN DEFAULT FALSE;
+ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS printer_override BOOLEAN DEFAULT FALSE;
 
 CREATE OR REPLACE VIEW FULL_INDUCTION_VIEW AS
 SELECT 
@@ -152,7 +151,6 @@ SELECT
     i.canlasercut as canlasercut,
     i.time_added,
     i.can_resin as can_resin,
-    i.extended_print_time as extended_print_time,
-    i.can_use_all_printers as can_use_all_printers
+    i.printer_override as printer_override,
 FROM public.induction i 
 LEFT JOIN public.shortcode_card_mapping m ON i.shortcode=m.shortcode;
