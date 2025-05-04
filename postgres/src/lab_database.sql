@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS public.ble_stats
 
 CREATE TABLE IF NOT EXISTS public.ble_addresses
 (
-    mac_addr VARCHAR(17) NOT NULL,
+    mac_addr VARCHAR(17) NOT NULL UNIQUE,
     shortcode VARCHAT(10) NOT NULL,
     CONSTRAINT shortcode FOREIGN KEY (shortcode)
         REFERENCES public.induction (shortcode) MATCH SIMPLE
