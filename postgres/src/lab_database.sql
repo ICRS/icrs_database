@@ -142,12 +142,24 @@ CREATE TABLE IF NOT EXISTS public.ble_stats
 (
     mac_addr VARCHAR(17) NOT NULL,
     "timestamp" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
-)
+);
+
+CREATE TABLE IF NOT EXISTS public.ble_addresses
+(
+    mac_addr VARCHAR(17) NOT NULL,
+    shortcode VARCHAT(10) NOT NULL,
+    CONSTRAINT shortcode FOREIGN KEY (shortcode)
+        REFERENCES public.induction (shortcode) MATCH SIMPLE
+        ON DELETE CASCADE,
+    CONSTRAINT addr_shortcode_unique UNIQUE (mac_addr, shortcode)
+);
 
 
 ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS can_resin BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS printer_override BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE public.INDUCTION ADD COLUMN IF NOT EXISTS is_lab_trained BOOLEAN DEFAULT FALSE;
 
 CREATE OR REPLACE VIEW FULL_INDUCTION_VIEW AS
 SELECT 
@@ -159,5 +171,6 @@ SELECT
     i.time_added,
     i.can_resin as can_resin,
     i.printer_override as printer_override,
+    i.is_lab_trained as is_lab_trained
 FROM public.induction i 
 LEFT JOIN public.shortcode_card_mapping m ON i.shortcode=m.shortcode;
